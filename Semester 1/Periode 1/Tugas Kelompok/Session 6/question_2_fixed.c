@@ -27,6 +27,7 @@ int main()
 
     // Input Mahasiswa Score
     int kuis, tugas, absensi, praktek, uas;
+    double jumlahAverage = 0.0;
     int lulus = 1;
     printf("\nSilahkan masukkan nilai kuis, tugas, absensi, praktek, dan UAS\ntiap mahasiswa.\n");
     for (int i = 1; i <= mahasiswa; i++)
@@ -98,7 +99,7 @@ int main()
 
         // Average Score Arithmatic
         double nilaiRataRata = (kuis + tugas + absensi + praktek + uas) / 5.0;
-
+        jumlahAverage += nilaiRataRata;
         // Determine grade
         char grade;
         if (nilaiRataRata <= 55)
@@ -143,6 +144,7 @@ int main()
     // Say goodbye to user
     printf("\n=================================================================\n");
     printf("\nAnda telah memberikan nilai pada %d mahasiswa. Semoga tidak ada\nkesalahan dalam memasukkan nilai.\n");
+    printf("Sehingga dapat diketahui bahwa rata-rata nilai dari %d mahasiswa adalah %.2lf.", mahasiswa, jumlahAverage / mahasiswa);
     printf("\n=================================================================\n");
     printf("\033[1;35m                        SAMPAI JUMPA LAGI!\033[0m\n");
     printf("=================================================================\n");
