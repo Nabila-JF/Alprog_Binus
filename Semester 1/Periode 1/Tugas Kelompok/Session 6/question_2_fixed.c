@@ -22,7 +22,7 @@ int main()
 
     int mahasiswa;
 
-    printf("\nSilahkan masukkan jumlah mahasiswa minimal 10 orang untuk\n menjalankan aplikasi.\n");
+    printf("\nSilahkan masukkan jumlah mahasiswa minimal 10 orang untuk\nmenjalankan aplikasi.\n");
 
     printf("\nMasukkan jumlah mahasiswa: ");
 
@@ -50,7 +50,7 @@ int main()
 
     bool status[mahasiswa];
 
-    printf("\nSilahkan masukkan nilai kuis, tugas, absensi, praktek, dan UAS \n tiap mahasiswa.\n");
+    printf("\nSilahkan masukkan nilai kuis, tugas, absensi, praktek, dan UAS \ntiap mahasiswa.\n");
 
     for (int i = 1; i <= mahasiswa; i++)
 
@@ -211,7 +211,7 @@ int main()
 
     printf("\nAnda telah memberikan nilai pada %d mahasiswa. Semoga tidak ada\nkesalahan dalam memasukkan nilai.\n", mahasiswa);
 
-    printf("Sehingga dapat diketahui bahwa rata-rata nilai dari %d mahasiswa adalah%.2lf.", mahasiswa, jumlahAverage / mahasiswa);
+    printf("Sehingga dapat diketahui bahwa rata-rata nilai dari %d mahasiswa adalah %.2lf.", mahasiswa, jumlahAverage / mahasiswa);
 
     printf("\n=================================================================\n");
 
