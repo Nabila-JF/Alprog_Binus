@@ -1,153 +1,221 @@
 #include <stdio.h>
+
+#include <stdbool.h>
+
 #include <ctype.h>
 
 int main()
+
 {
 
     // Welcoming user
+
     printf("=================================================================\n");
-    printf("           \033[1;35mAPLIKASI PENGHITUNG RATA-RATA NILAI MAHASISWA\033[0m\n");
+
+    printf(" \033[1;35mAPLIKASI PENGHITUNG RATA-RATA NILAI MAHASISWA\033[0m\n");
+
     printf("=================================================================\n");
+
     printf("\nAplikasi ini diperuntukkan untuk menghitung nilai mahasiswa.\nTolong isi dengan teliti untuk menghindari kesalahan penilaian.\n");
 
     // Input the number of Mahasiswa
-    int mahasiswa;
-    printf("\nSilahkan masukkan jumlah mahasiswa minimal 10 orang untuk\nmenjalankan aplikasi.\n");
-    do
-    {
-        printf("\nMasukkan jumlah mahasiswa: ");
-        scanf("%d", &mahasiswa);
-        if (mahasiswa < 10)
-        {
-            printf("\033[1;31mSilahkan masukkan minimal 10 orang.\033[0m\n");
-        }
 
-    } while (mahasiswa < 10);
+    int mahasiswa;
+
+    printf("\nSilahkan masukkan jumlah mahasiswa minimal 10 orang untuk\n menjalankan aplikasi.\n");
+
+    printf("\nMasukkan jumlah mahasiswa: ");
+
+    scanf("%d", &mahasiswa);
+
+    if (mahasiswa < 10)
+
+    {
+
+        printf("\033[1;31mSilahkan masukkan minimal 10 orang.\033[0m\n");
+
+        return 0;
+    }
     printf("\n=================================================================\n");
 
     // Input Mahasiswa Score
-    int kuis, tugas, absensi, praktek, uas;
-    double jumlahAverage = 0.0;
-    int lulus = 1;
-    printf("\nSilahkan masukkan nilai kuis, tugas, absensi, praktek, dan UAS\ntiap mahasiswa.\n");
+
+    char jenisNilai[5][20] = {"kuis", "tugas", "absensi", "praktek", "UAS"};
+
+    double nilaiRataRata[mahasiswa];
+
+    char grade[mahasiswa];
+
+    double jumlahAverage = 0.00;
+
+    bool status[mahasiswa];
+
+    printf("\nSilahkan masukkan nilai kuis, tugas, absensi, praktek, dan UAS \n tiap mahasiswa.\n");
+
     for (int i = 1; i <= mahasiswa; i++)
+
     {
         printf("\n=================================================================\n");
 
         printf("\nMahasiswa %d\n\n", i);
+
         printf("Masukkan nilai mahasiswa %d:\n", i);
 
         // Quiz Score
-        do
+
+        int nilai[5];
+
+        for (int j = 0; j < 5; j++)
+
         {
-            printf("Nilai Kuis: ");
-            scanf("%d", &kuis);
-            if (kuis > 100 || kuis < 0)
+
+            int tmpNilai;
+
+            do
+
             {
-                printf("\033[1;31mSilahkan masukkan nilai dalam rentang 1-100.\033[0m\n");
-            }
 
-        } while (kuis > 100 || kuis < 0);
+                printf("Nilai %s: ", jenisNilai[j]);
 
-        // Task Score
-        do
-        {
-            printf("Nilai Tugas: ");
-            scanf("%d", &tugas);
-            if (tugas > 100 || tugas < 1)
-            {
-                printf("\033[1;31mSilahkan masukkan nilai dalam rentang 1-100.\033[0m\n");
-            }
+                scanf("%d", &tmpNilai);
 
-        } while (tugas > 100 || tugas < 1);
+                if (tmpNilai > 100 || tmpNilai < 0)
 
-        // Absent Score
-        do
-        {
-            printf("Nilai Absensi: ");
-            scanf("%d", &absensi);
-            if (absensi > 100 || absensi < 1)
-            {
-                printf("\033[1;31mSilahkan masukkan nilai dalam rentang 1-100.\033[0m\n");
-            }
+                {
 
-        } while (absensi > 100 || absensi < 1);
+                    printf("\033[1;31mSilahkan masukkan nilai dalam rentang 1-100.\033[0m\n");
+                }
 
-        // Practice Score
-        do
-        {
-            printf("Nilai Praktek: ");
-            scanf("%d", &praktek);
-            if (praktek > 100 || praktek < 1)
-            {
-                printf("\033[1;31mSilahkan masukkan nilai dalam rentang 1-100.\033[0m\n");
-            }
+                else
 
-        } while (praktek > 100 || praktek < 1);
+                {
 
-        // UAS Score
-        do
-        {
-            printf("Nilai UAS: ");
-            scanf("%d", &uas);
-            if (uas > 100 || uas < 1)
-            {
-                printf("\033[1;31mSilahkan masukkan nilai dalam rentang 1-100.\033[0m\n");
-            }
+                    nilai[j] = tmpNilai;
+                }
 
-        } while (uas > 100 || uas < 1);
+            } while (tmpNilai > 100 || tmpNilai < 0);
+
+            // Task Score
+        }
 
         // Average Score Arithmatic
-        double nilaiRataRata = (kuis + tugas + absensi + praktek + uas) / 5.0;
-        jumlahAverage += nilaiRataRata;
+
+        nilaiRataRata[i - 1] = (nilai[0] + nilai[1] + nilai[2] + nilai[3] + nilai[4]) / 5.0;
+
         // Determine grade
-        char grade;
-        if (nilaiRataRata <= 55)
+
+        jumlahAverage += nilaiRataRata[i - 1];
+
+        if (nilaiRataRata[i - 1] <= 55)
+
         {
-            grade = 'E';
-            lulus = 0; // Set flag "Tidak Lulus" if anyone gets grade E
+
+            grade[i - 1] = 'E';
+
+            status[i - 1] = false; // Set flag "Tidak Lulus" if anyone gets grade E
         }
-        else if (nilaiRataRata <= 65)
+
+        else if (nilaiRataRata[i - 1] <= 65)
+
         {
-            grade = 'D';
-            lulus = 0; // Set flag "Tidak Lulus" if anyone gets grade D
+
+            grade[i - 1] = 'D';
+
+            status[i - 1] = false; // Set flag "Tidak Lulus" if anyone gets grade D
         }
-        else if (nilaiRataRata <= 75)
+
+        else if (nilaiRataRata[i - 1] <= 75)
+
         {
-            grade = 'C';
+
+            grade[i - 1] = 'C';
+
+            status[i - 1] = true;
         }
-        else if (nilaiRataRata <= 85)
+
+        else if (nilaiRataRata[i - 1] <= 85)
+
         {
-            grade = 'B';
+
+            grade[i - 1] = 'B';
+
+            status[i - 1] = true;
         }
+
         else
+
         {
-            grade = 'A';
+
+            grade[i - 1] = 'A';
+
+            status[i - 1] = true;
         }
 
         // Print the average results and Mahasiswa grade
+
         printf("\nBerikut merupakan hasil rata-rata, grade dan status mahasiswa:\n\n");
-        printf(">> Rata-rata nilai mahasiswa: %.2f\n", nilaiRataRata);
-        printf(">> Grade Mahasiswa %d: %c\n", i, grade);
-        if (lulus == 0)
+
+        printf(">> Rata-rata nilai mahasiswa: %.2f\n", nilaiRataRata[i - 1]);
+
+        printf(">> Grade Mahasiswa %d: %c\n", i, grade[i - 1]);
+
+        if (status[i - 1])
+
         {
-            printf(">> Status mahasiswa: Tidak Lulus\n");
-        }
-        else
-        {
+
             printf(">> Status mahasiswa: Lulus\n");
         }
 
-        lulus = 1;
+        else
+
+        {
+
+            printf(">> Status mahasiswa: Tidak Lulus\n");
+        }
+    }
+
+    printf("\n=================================================================\n");
+
+    printf("AKUMULASI NILAI MAHASISWA \n \n");
+
+    for (int i = 0; i < mahasiswa; i++)
+
+    {
+
+        printf("MAHASISWA %d \n", i + 1);
+
+        printf(">> Rata-rata nilai mahasiswa: %.2f\n", nilaiRataRata[i]);
+
+        printf(">> Grade Mahasiswa %d: %c\n", i, grade[i]);
+
+        if (status[i])
+
+        {
+
+            printf(">> Status mahasiswa: Lulus\n");
+        }
+
+        else
+
+        {
+
+            printf(">> Status mahasiswa: Tidak Lulus\n");
+        }
+
+        printf("\n");
     }
 
     // Say goodbye to user
-    printf("\n=================================================================\n");
-    printf("\nAnda telah memberikan nilai pada %d mahasiswa. Semoga tidak ada\nkesalahan dalam memasukkan nilai.\n");
-    printf("Sehingga dapat diketahui bahwa rata-rata nilai dari %d mahasiswa adalah %.2lf.", mahasiswa, jumlahAverage / mahasiswa);
-    printf("\n=================================================================\n");
-    printf("\033[1;35m                        SAMPAI JUMPA LAGI!\033[0m\n");
-    printf("=================================================================\n");
 
-    return 0;
+    printf("\n=================================================================\n");
+
+    printf("\nAnda telah memberikan nilai pada %d mahasiswa. Semoga tidak ada\nkesalahan dalam memasukkan nilai.\n", mahasiswa);
+
+    printf("Sehingga dapat diketahui bahwa rata-rata nilai dari %d mahasiswa adalah%.2lf.", mahasiswa, jumlahAverage / mahasiswa);
+
+    printf("\n=================================================================\n");
+
+    printf("\033[1;35m SAMPAI JUMPA LAGI!\033[0m\n");
+
+    printf("=================================================================\n");
 }
